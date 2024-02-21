@@ -6,12 +6,18 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/20 14:07:47 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:04:52 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
+
+typedef struct s_map
+{
+    char *mapv;
+    char **mapm;
+} t_map;
 
 typedef struct s_boh
 {
@@ -36,7 +42,8 @@ typedef struct s_player
 typedef struct s_all
 {
     t_boh boh;
-    t_player player;  
+    t_player player;
+    t_map map;
 } t_all;
 
 #endif
