@@ -1,1 +1,7 @@
 Quando compila crea un secondo cub3d.o nella directory generale
+
+1111111
+100101
+101001
+1100N1
+111111  qua stampa error ma forse non dovrebbe

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:41:48 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/21 16:35:49 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:22:04 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    printmatrix(t_all *all)
 
     while (all->map.mapm[i])
     {
-        ft_printf("%s", all->map.mapm[i]);
+        ft_printf("%s\n", all->map.mapm[i]);
         i++;
     }
 }
@@ -29,7 +29,6 @@ void    read_map(t_all *all, char *av)
 	char	*str;
     int     i;
 
-    ft_printf("ciao1\n");
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 		return ;
@@ -37,22 +36,15 @@ void    read_map(t_all *all, char *av)
 	all->map.mapv[0] = '\0';
 	while (1)
 	{  
-        ft_printf("ciao2\n");
         i = 0;
 		str = get_next_line(fd);
 		if (!str)
 			break ;
-        while (str[i])
-        {ft_printf("ciao3\n");
-            if (str[i] != '0' && str[i] != '1' && str[i] != 'N'){
-                str[i] = '\0';}
-                ft_printf("ciao4\n");
-            i++;
-        }
-		all->map.mapv = ft_strjoin(all->map.mapv, str);
+        if (str[0] != 'N' && str[0] != 'S' && str[0] != 'W' && str[0] != 'E')
+ 
+		    all->map.mapv = ft_strjoin(all->map.mapv, str);
 		free(str);
 	}
-    ft_printf("%s\n", all->map.mapv);
 	all->map.mapm = ft_split(all->map.mapv, '\n');
     printmatrix(all);
 	close(fd);
@@ -93,6 +85,7 @@ int main(int ac, char **av)
     }
     init(&all);
     read_map(&all, av[1]);
+    check_wall(&all);
     //check_map(&all);
     //cub3d(&all);
     //free(&all);

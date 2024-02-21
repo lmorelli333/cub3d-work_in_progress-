@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:12:48 by lmorelli          #+#    #+#              #
-#    Updated: 2024/02/20 19:33:23 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/02/21 17:21:26 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ PRINTF			=   $(PRINTF_PATH)/libftprintf.a
 GNL_PATH		=   lib/get_next_line
 GNL				=   $(GNL_PATH)/get_next_line.a
 
-SRC	=	src/cub3d.c
+SRC	=	src/cub3d.c src/checks.c
 
 HEADER			=	./cub3d.h
 

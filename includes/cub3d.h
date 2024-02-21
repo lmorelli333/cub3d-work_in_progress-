@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:51:55 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/21 16:21:19 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:21:40 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include <stdio.h>
 # include <math.h>
 #include <fcntl.h>
+
+void	check_wall(t_all *all);
 
 #endif
