@@ -1,0 +1,1 @@
+Quando compila crea un secondo cub3d.o nella directory generale
