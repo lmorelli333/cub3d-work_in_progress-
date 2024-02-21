@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:52:02 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/21 16:04:52 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:44:56 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ typedef struct s_map
 {
     char *mapv;
     char **mapm;
+    int i_less;
+    int i_plus;
+    int j_less;
+    int j_plus;
 } t_map;
 
 typedef struct s_boh
