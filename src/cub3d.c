@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:41:48 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/21 20:44:17 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:29:39 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int main(int ac, char **av)
     }
     init(&all);
     read_map(&all, av[1]);
-    if (check_wall(&all))
+    if (flood_fill(&all))
         ft_printf("Error\n");
     if (check_av(av[1]))
         ft_printf("Error\n");
