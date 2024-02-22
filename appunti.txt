@@ -1,6 +1,0 @@
-Quando compila crea un secondo cub3d.o nella directory generale
-
-Il check della mappa non va bene ma bisogna usare l algoritmo flood fill:
-Va fatto ricorsivo.
-Se trovo un 1 ritorno.
-Se trovo roba diversa da 1 allora controllo se ha intorno a se tutti char accettabili.

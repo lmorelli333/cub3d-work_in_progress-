@@ -6,7 +6,7 @@
 #    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:12:48 by lmorelli          #+#    #+#              #
-#    Updated: 2024/02/21 17:21:26 by lmorelli         ###   ########.fr        #
+#    Updated: 2024/02/22 16:07:51 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,6 +112,7 @@ clean:
 				make clean -C ${PRINTF_PATH}
 				make clean -C ${GNL_PATH}
 				make clean -C ${MINILIBX_PATH}
+				${RM} *o
 				@echo "\033[33mObjects removed\033[0m"
 
 fclean:			clean

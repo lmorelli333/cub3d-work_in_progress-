@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 17:51:55 by lmorelli          #+#    #+#             */
-/*   Updated: 2024/02/22 12:28:21 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:13:34 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 # include <math.h>
 #include <fcntl.h>
 
-int	check_wall(t_all *all);
 int	check_av(char *av);
-int flood_fill(t_all *all);
+int check_map(t_all *all);
 
 #endif
