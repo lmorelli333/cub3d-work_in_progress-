@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 04:00:22 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 05:14:14 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 05:16:36 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void find_player(t_map *map)
     player = (t_player *)malloc(sizeof(t_player));
     if (!player)
         return;
+
     player->y = 0;
     player->x = 0;
-    while (player->y < map->map->lines)
+
+    while (player->y < map->lines)
 	{
         while (player->x < map->max)
 		{
