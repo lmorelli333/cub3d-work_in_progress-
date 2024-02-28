@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 04:16:10 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:45:43 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+
+# include "./minilibx/mlx.h"
 
 typedef struct s_map
 {
@@ -42,10 +44,17 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int y;
-	int x;
+	int		y;
+	int		x;
+	char	**field;
 	t_map	*map;
 }		t_player;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*window;
+}		t_game;
 
 char	*get_next_line(int fd);
 char	**ft_split(char const *s, char c);
@@ -70,7 +79,8 @@ int		check_player(char *s);
 void	find_len_and_lines(t_map *map, char *s);
 
 //check_map.c
-void	find_player(t_map *map);
+void	find_player(t_map *map, char *s);
+void	play(t_map *map);
 
 #endif
 

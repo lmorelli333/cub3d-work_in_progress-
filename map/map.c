@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:25:27 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 04:22:17 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 06:08:31 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	purify_map(t_map *map, int fd, char *s)
 		return (err("Error: the map must contain 1 player.\n\n"));
 	map->map = ft_split(res, '\n');
 	if (!map->map)
-		return (err("Error: problems in reading the map\n\n"));
-	find_player(map);
+		return (err("Error: problems in reading the map.\n\n"));
+	find_player(map, res);
 	free(res);
 	return (1);
 }
