@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/26 17:21:28 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 04:16:10 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,57 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*f;
-	char	*c;
+	char	*f_rgb; 		//capire come passare a mlx se da int o stringa
+	char	*c_rgb; 		//e poi implementare colors.c/read_rgb(){}
+	int		f[3];
+	int		c[3];
 	int		ok;
+	int		max;
+	int		lines;
 	//da freeare stringhe e struct
 }		t_map;
+
+typedef struct s_player
+{
+	int y;
+	int x;
+	t_map	*map;
+}		t_player;
 
 char	*get_next_line(int fd);
 char	**ft_split(char const *s, char c);
 
+//utils.c
 int		err(char *s);
-char	*fix_map(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	len_number(int n);
+char	*ft_itoa(int n);
+int		ft_atoi(const char *str);
+
+//map.c
 void	init_map(t_map	*map);
 int		take_params(char *path);
-int		check_extension(char *path);
-char	*take_map(char *s1, char *s2);
-void	split_coordinates(t_map *map, char *s);
 int		purify_map(t_map *map, int fd, char *s);
+char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
+
+//map_utils.c
+int		check_extension(char *path);
+void	split_coordinates(t_map *map, char *s);
+int		check_player(char *s);
+void	find_len_and_lines(t_map *map, char *s);
+
+//check_map.c
+void	find_player(t_map *map);
+
 #endif
 
 //salvare mappa in matrice e riempire con 0 gli spazi
-//convertire i colori
 //verificare che non ci sia piu di un player
+//check esistenza/doppi path punti cardinali t_map (capire se necessario da subject)
+//convertire i colori
+
+
 //verificare la mappa che sia valida
 //check a split_coordinates funzione
-//check esistenza/doppi path punti cardinali t_map
+//capire perche non legge bene se non ce ultima riga vuota nella mappa(riguarda gnl)
+//freeare matrici varie

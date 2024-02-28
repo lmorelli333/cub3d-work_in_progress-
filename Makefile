@@ -6,13 +6,15 @@
 #    By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 10:39:28 by fcarlucc          #+#    #+#              #
-#    Updated: 2024/02/26 10:40:42 by fcarlucc         ###   ########.fr        #
+#    Updated: 2024/02/28 03:08:30 by fcarlucc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC = $(wildcard *.c) \
+		$(wildcard utils/*.c) \
+		$(wildcard map/*.c) \
 
 OBJS = $(SRC:.c=.o)
 

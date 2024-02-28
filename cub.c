@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:26:48 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/26 16:14:51 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:10:25 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main(int ac, char **av)
 		if (take_params(av[1]))
 		{
 			printf("ccciaooo");
+			
 		}
 		return (1);
 	}

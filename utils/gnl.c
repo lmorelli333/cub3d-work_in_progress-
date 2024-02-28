@@ -6,11 +6,11 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:45:20 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/26 15:06:26 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:06:21 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -46,7 +46,7 @@ int	ft_cleanbuff(char *buff)
 	return (newline);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_next(char *s1, char *s2)
 {
 	int		i;
 	char	*s3;
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	readline = NULL;
 	while (*buff || read(fd, buff, BUFFER_SIZE) > 0)
 	{
-		readline = ft_strjoin(readline, buff);
+		readline = ft_strjoin_next(readline, buff);
 		if (ft_cleanbuff(buff))
 			break ;
 	}

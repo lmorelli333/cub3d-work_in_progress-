@@ -6,11 +6,11 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:22:59 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/26 16:38:03 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:06:27 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "../cub.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
