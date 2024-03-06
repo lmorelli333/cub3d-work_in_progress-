@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:31:12 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 04:43:01 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/06 03:37:49 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,66 +32,95 @@ void	split_coordinates(t_map *map, char *s)
 	if (s[0] == 'N' && s[1] == 'O' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->no)
-            map->ok = -1;
+            map->flag = -1;
 		map->no = s;
 	}
 	else if (s[0] == 'S' && s[1] == 'O' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->so)
-            map->ok = -1;
+            map->flag = -1;
 		map->so = s;
 	}
 	else if (s[0] == 'W' && s[1] == 'E' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->we)
-            map->ok = -1;
+            map->flag = -1;
 		map->we = s;
 	}
 	else if (s[0] == 'E' && s[1] == 'A' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->ea)
-            map->ok = -1;
+            map->flag = -1;
 		map->ea = s;
 	}
 	else if (s[0] == 'F' && (s[1] == 32 || (s[1] >= 9 && s[1] <= 13)))
 	{
 		if (map->f_rgb)
-            map->ok = -1;
+            map->flag = -1;
 		++s;
 		map->f_rgb = ++s;
 	}
 	else if (s[0] == 'C' && (s[1] == 32 || (s[1] >= 9 && s[1] <= 13))) //sembra non funzionare solo con C provare su linux
 	{
 		if (map->c_rgb)
-            map->ok = -1;
+            map->flag = -1;
 		++s;
 		map->c_rgb = ++s;
 	}
 	if (map->no && map->so && map->we && map->ea && map->f_rgb && map->c_rgb)
-		map->ok = 1;
+		map->flag = 1;
 	return ;
 }
 
-int	check_player(char *s)
+int	check_player(t_map *map, char *s)
 {
 	int i;
-	int count;
+	int j;
 
 	i = -1;
-	count = 0;
-	while (s[++i])
+	map->flag = 0;
+	map->map = ft_split(s, '\n');
+	if (!map->map)
+		return (err("Error: problems in reading the map.\n\n"));
+	while (map->map[++i])
 	{
-		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E')
-			count++;
-		if (s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E' && s[i] != '0' && s[i] != '1' && s[i] != '\n')
-			return (0);
+		j = -1;
+		while (map->map[i][++j])
+		{
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' || map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			{
+				map->y = i;
+				map->x = j;
+				map->flag++;
+			}
+			if (map->map[i][j] != 'N' && map->map[i][j] != 'S' && map->map[i][j] != 'W' && map->map[i][j] != 'E' && map->map[i][j] != '0' && map->map[i][j] != '1' && map->map[i][j] != '\n')
+				return (0);
+		}
 	}
-	printf("%d\n", count);
-	return (count);
-		
+	printf("%d\n", map->flag);
+	return (map->flag);
 }
 
-void	find_len_and_lines(t_map *map, char *s)
+// int	check_player(char *s)
+// {
+// 	int i;
+// 	int count;
+
+// 	i = -1;
+// 	count = 0;
+// 	while (s[++i])
+// 	{
+// 		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'W' || s[i] == 'E')
+// 			count++;
+// 		if (s[i] != 'N' && s[i] != 'S' && s[i] != 'W' && s[i] != 'E' && s[i] != '0' && s[i] != '1' && s[i] != '\n')
+// 			return (0);
+// 	}
+// 	printf("%d\n", count);
+// 	return (count);
+		
+// }
+
+void	find_rows_and_cols(t_map *map, char *s)
 {
 	int i;
 	int j;
@@ -107,13 +136,14 @@ void	find_len_and_lines(t_map *map, char *s)
 		else
 		{
 			j++;
-			if (j > map->max)
-				map->max = j;
-			map->lines++;
+			if (j > map->cols)
+				map->cols = j;
+			map->rows++;
 			j = 0;
 		}
 		i++;
 	}
+	map->rows--;
 	return ;
 }
 

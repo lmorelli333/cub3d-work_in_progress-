@@ -6,7 +6,7 @@
 /*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 06:45:43 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/06 05:08:20 by fcarlucc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,13 @@ typedef struct s_map
 	char	*c_rgb; 		//e poi implementare colors.c/read_rgb(){}
 	int		f[3];
 	int		c[3];
-	int		ok;
-	int		max;
-	int		lines;
-	//da freeare stringhe e struct
-}		t_map;
-
-typedef struct s_player
-{
+	int		flag;
+	int		cols;
+	int		rows;
 	int		y;
 	int		x;
-	char	**field;
-	t_map	*map;
-}		t_player;
+	//da freeare stringhe e struct
+}		t_map;
 
 typedef struct s_game
 {
@@ -71,15 +65,18 @@ void	init_map(t_map	*map);
 int		take_params(char *path);
 int		purify_map(t_map *map, int fd, char *s);
 char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
-
+void	take_colors(t_map *map);
 //map_utils.c
 int		check_extension(char *path);
 void	split_coordinates(t_map *map, char *s);
-int		check_player(char *s);
-void	find_len_and_lines(t_map *map, char *s);
+int		check_player(t_map *map, char *s);
+void	find_rows_and_cols(t_map *map, char *s);
 
 //check_map.c
-void	find_player(t_map *map, char *s);
+int		is_playable(t_map *map);
+void	flood_fill(t_map *map, int y, int x);
+int		ft_close(void);
+int		ft_move(int keycode, t_game *game);
 void	play(t_map *map);
 
 #endif
@@ -88,9 +85,10 @@ void	play(t_map *map);
 //verificare che non ci sia piu di un player
 //check esistenza/doppi path punti cardinali t_map (capire se necessario da subject)
 //convertire i colori
-
-
 //verificare la mappa che sia valida
+
+
 //check a split_coordinates funzione
 //capire perche non legge bene se non ce ultima riga vuota nella mappa(riguarda gnl)
+//togliere decremento a rows se fixi gnl
 //freeare matrici varie
