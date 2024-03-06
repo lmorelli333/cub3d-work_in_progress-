@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/06 05:08:20 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:17:16 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ void	flood_fill(t_map *map, int y, int x);
 int		ft_close(void);
 int		ft_move(int keycode, t_game *game);
 void	play(t_map *map);
+
+
+int check_map(t_map *map);
+
 
 #endif
 

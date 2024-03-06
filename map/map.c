@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:25:27 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/06 05:07:11 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:14:30 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ void	take_colors(t_map *map)
 	map->c[2] = ft_atoi(colors[2]);
 	//free_matrix
 }
+void    printmatrix(char **map)
+{
+
+    while (*map)
+    {
+        printf("%s\n", *map);
+        map++;
+    }
+    return ;
+}
 
 int	purify_map(t_map *map, int fd, char *s)
 {
@@ -95,19 +105,28 @@ int	purify_map(t_map *map, int fd, char *s)
 			res = ft_strjoin(res, s);
 	}
 	printf("%s\n", res);
+    map->map = ft_split(res, '\n');
+    printf("questa 'e la matrice :\n");
+   printmatrix(map->map);
 	find_rows_and_cols(map, res);
+    
+    if (check_map(map))
+    {
+        write(2, "Error check\n", 12);
+        exit (1);
+    }
 	res = fix_map(map, res);
 	if (check_player(map, res) != 1)
 		return (err("Error: the map must contain 1 player.\n\n"));
 	printf("\n\n%s\n\n\ncol%d\nrow%d\n%d\n%d", res, map->cols, map->rows, map->y, map->x);
-	if (is_playable(map))
+	// if (is_playable(map))
         play(map);
-	else
-	{
-		free(res);
-	    return (0);
-	}
-	free(res);
+	// else
+	// {
+	// 	free(res);
+	//     return (0);
+	// }
+	// free(res);
 	return (1);
 }
 
