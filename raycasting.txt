@@ -1,0 +1,38 @@
+RAYCASTING
+
+
+
+Inizializzazione dei parametri del raycast: Viene inizializzata la struttura t_ray e viene chiamata la funzione define_view per definire la direzione della visuale del giocatore in base alla mappa fornita.
+
+
+Ciclo principale per ogni colonna dello schermo: Il ciclo while scorre tutte le colonne dello schermo.
+
+
+Calcolo della direzione del raggio per la colonna corrente: La funzione calculate_ray_directions calcola la direzione del raggio per la colonna corrente dello schermo.
+
+
+Calcolo della posizione sulla mappa corrispondente al raggio: Viene calcolata la posizione sulla mappa (coordinata x e y) corrispondente alla posizione del raggio.
+
+
+Calcolo delle distanze delta (deltaDistX e deltaDistY): Vengono calcolate le distanze delta, che rappresentano la lunghezza del raggio da una parete all'altra nella direzione X e Y.
+
+
+Inizializzazione dei passi e delle distanze del lato: La funzione initialize_step_and_side_distances inizializza i passi e le distanze del lato, necessari per il successivo algoritmo di tracciamento del raggio.
+
+
+Esecuzione dell'algoritmo DDA (Digital Differential Analyzer): L'algoritmo DDA viene eseguito per tracciare il raggio attraverso la mappa e determinare se colpisce una parete.
+
+
+Calcolo della distanza perpendicolare alla parete: Viene calcolata la distanza perpendicolare alla parete, che rappresenta la distanza dalla posizione del giocatore alla parete colpita dal raggio.
+
+
+Calcolo dell'altezza di disegno sulla schermata: Viene calcolata l'altezza del segmento della parete da disegnare sulla schermata.
+
+
+Impostazione del colore del raggio: In base al tipo di muro colpito, viene impostato il colore del raggio.
+
+
+Disegno del segmento di parete sulla schermata: Utilizzando la funzione verLine, viene disegnato il segmento della parete sulla schermata, con l'altezza calcolata e il colore corrispondente.
+
+
+Questo processo viene quindi ripetuto per ogni colonna dello schermo, creando così l'effetto di profondità e distanza nei giochi basati sul raycasting.
