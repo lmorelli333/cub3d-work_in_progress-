@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:31:12 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/07 02:17:17 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:08:35 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,38 @@ void	textures_and_colors(t_map *map, char *s)
 	if (s[0] == 'N' && s[1] == 'O' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->no)
-            map->flag = -1;
+			map->flag = -1;
 		map->no = s;
 	}
 	else if (s[0] == 'S' && s[1] == 'O' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->so)
-            map->flag = -1;
+			map->flag = -1;
 		map->so = s;
 	}
 	else if (s[0] == 'W' && s[1] == 'E' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->we)
-            map->flag = -1;
+			map->flag = -1;
 		map->we = s;
 	}
 	else if (s[0] == 'E' && s[1] == 'A' && (s[2] == 32 || (s[2] >= 9 && s[2] <= 13)))
 	{
 		if (map->ea)
-            map->flag = -1;
+			map->flag = -1;
 		map->ea = s;
 	}
 	else if (s[0] == 'F' && (s[1] == 32 || (s[1] >= 9 && s[1] <= 13)))
 	{
 		if (map->f_rgb)
-            map->flag = -1;
+			map->flag = -1;
 		++s;
 		map->f_rgb = ++s;
 	}
 	else if (s[0] == 'C' && (s[1] == 32 || (s[1] >= 9 && s[1] <= 13))) //sembra non funzionare solo con C provare su linux
 	{
 		if (map->c_rgb)
-            map->flag = -1;
+			map->flag = -1;
 		++s;
 		map->c_rgb = ++s;
 	}
@@ -74,8 +74,8 @@ void	textures_and_colors(t_map *map, char *s)
 
 int	check_player(t_map *map, char *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	map->flag = 0;
@@ -123,9 +123,9 @@ int	check_player(t_map *map, char *s)
 
 void	find_rows_and_cols(t_map *map, char *s)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (s[i])
@@ -147,4 +147,3 @@ void	find_rows_and_cols(t_map *map, char *s)
 	map->rows--;
 	return ;
 }
-

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:29:11 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/08 17:17:56 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:30:23 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-int	raycasting()
+int	raycasting(t_map *map)
 {
 	int		i;
 	t_ray	*ray;
@@ -20,26 +20,26 @@ int	raycasting()
 	ray = (t_ray *)malloc(sizeof(t_ray));
 	if (!ray)
 		return (0);
-	ray_init(ray);
+	ray_init(ray, map);
 	i = -1;
 	while (++i < screenWidth)    //vedere se sostituire i con widtheight
 	{
-		calculate_ray_position_and_direction(ray, i);
-		calculate_step_and_side_distances(ray);
-		perform_dda(ray);
-		calculate_distance_projected_on_camera(ray);
-		calculate_pixels(ray);
+		// calculate_ray_position_and_direction(ray, i);
+		// calculate_step_and_side_distances(ray);
+		// perform_dda(ray);
+		// calculate_distance_projected_on_camera(ray);
+		// calculate_pixels(ray);
 	}
 	return (0);
 }
 
-void ray_init(t_ray *ray)
+void	ray_init(t_ray *ray, t_map *map)
 {
 	ray->mapX = 0;
 	ray->mapY = 0;
-	ray->posX = ray->map->x;
-	ray->posY = ray->map->y;
-	define_view(ray);
+	ray->posX = (double)map->x;
+	ray->posY = (double)map->y;
+	define_view(ray, map);
 	ray->planeX = 0;
 	ray->planeY = 0.66;
 	ray->time = 0;
@@ -54,14 +54,16 @@ void ray_init(t_ray *ray)
 	ray->perpWallDist = 0;
 	ray->stepX = 0;
 	ray->stepY = 0;
-	ray->hit = 0;
+	ray->hit = 1;
 	ray->side = 0;
 	ray->lineHeight = 0;
 	ray->drawStart = 0;
 	ray->drawEnd = 0;
+	ray->dirY = 0;
+	ray->dirX = 0;
 }
 
-void calculate_ray_position_and_direction(t_ray *ray, int i)
+void	calculate_ray_position_and_direction(t_ray *ray, int i)
 {
 	ray->cameraX = 2 * i / (double)screenWidth - 1;
 	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
@@ -78,7 +80,7 @@ void calculate_ray_position_and_direction(t_ray *ray, int i)
 		ray->deltaDistY = fabs(1 / ray->rayDirY);
 }
 
-void calculate_step_and_side_distances(t_ray *ray)
+void	calculate_step_and_side_distances(t_ray *ray)
 {
 	if (ray->rayDirX < 0)
 	{
@@ -102,7 +104,7 @@ void calculate_step_and_side_distances(t_ray *ray)
 	}
 }
 
-void perform_dda(t_ray *ray)
+void	perform_dda(t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
@@ -123,7 +125,7 @@ void perform_dda(t_ray *ray)
 	}
 }
 
-void calculate_distance_projected_on_camera(t_ray *ray)
+void	calculate_distance_projected_on_camera(t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
@@ -142,24 +144,24 @@ void calculate_pixels(t_ray *ray)
 		ray->drawEnd = screenHeight - 1;
 }
 
-void define_view(t_ray *ray)
+void define_view(t_ray *ray, t_map *map)
 {
-	if (ray->map->view == 'N')
+	if (map->view == 'N')
 	{
 		ray->dirY = -1;
 		ray->dirX = 0;
 	}
-	if (ray->map->view == 'S')
+	if (map->view == 'S')
 	{
 		ray->dirY = 1;
 		ray->dirX = 0;
 	}
-	if (ray->map->view == 'W')
+	if (map->view == 'W')
 	{
 		ray->dirY = 0;
 		ray->dirX = -1;
 	}
-	if (ray->map->view == 'E')
+	if (map->view == 'E')
 	{
 		ray->dirY = 0;
 		ray->dirX = 1;

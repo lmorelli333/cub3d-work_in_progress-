@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:32:20 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/02/28 03:21:54 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:11:22 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	err(char *s)
 {
-	//write(2, "Error : ", 7)
-    while (*s)
-        write(2, s++, 1);
-    return (0);
+	while (*s)
+		write(2, s++, 1);
+	return (0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)

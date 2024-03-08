@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/08 17:17:04 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 21:17:50 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int		ft_atoi(const char *str);
 //map.c
 void	init_map(t_map	*map);
 // int		take_params(char *path);
-int     take_params(t_map *map, char *path);
-int     check_map(char *path);
+int		take_params(t_map *map, char *path);
+int		check_map(char *path);
 int		purify_map(t_map *map, int fd, char *s);
 char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
 
@@ -123,14 +123,14 @@ int		ft_close(void);
 void	play(t_map *map);
 
 //ray.c
-int raycasting();
-void ray_init(t_ray *ray);
-void define_view(t_ray *ray);
-void calculate_ray_position_and_direction(t_ray *ray, int i);
-void calculate_step_and_side_distances(t_ray *ray);
-void perform_dda(t_ray *ray); //Digital Differential Analyzer (traccia i raggi)
-void calculate_distance_projected_on_camera(t_ray *ray);
-void calculate_pixels(t_ray *ray);
+int		raycasting(t_map *map);
+void	ray_init(t_ray *ray, t_map *map);
+void	define_view(t_ray *ray, t_map *map);
+void	calculate_ray_position_and_direction(t_ray *ray, int i);
+void	calculate_step_and_side_distances(t_ray *ray);
+void	perform_dda(t_ray *ray); //Digital Differential Analyzer (traccia i raggi)
+void	calculate_distance_projected_on_camera(t_ray *ray);
+void	calculate_pixels(t_ray *ray);
 // void set_ray_color(t_ray *ray);
 // void draw_lines(t_game *game, int x, int y1, int y2, int color);
 

@@ -3,64 +3,59 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+         #
+#    By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/26 10:39:28 by fcarlucc          #+#    #+#              #
-#    Updated: 2024/03/07 03:26:39 by fcarlucc         ###   ########.fr        #
+#    Updated: 2024/03/08 18:01:23 by lmorelli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC = $(wildcard *.c) \
-		$(wildcard map/*.c) \
-		$(wildcard utils/*.c) \
-		$(wildcard raycasting/*.c) \
+      $(wildcard map/*.c) \
+      $(wildcard utils/*.c) \
+      $(wildcard raycasting/*.c)
 
 OBJS = $(SRC:.c=.o)
 
 FLAGS := -Wall -Wextra -Werror -g
 
-MLX_FLAGS =	-lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -lmlx -lX11 -lXext -lm
 
-MINILIBX_PATH	=	./minilibx
+MINILIBX_PATH = /nfs/homes/lmorelli/Desktop/CUB3D/minilibx
 
-MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
+MINILIBX = $(MINILIBX_PATH)/libmlx.a
 
-#COLORS
+# COLORS
 RED = \033[1;31m
-
 GREEN = \033[1;32m
-
 YELLOW = \033[1;33m
-
 DEFAULT = \033[0m
 
 all: $(NAME)
 
 %.o : %.c
-	@cc $(FLAGS) -I/usr/includesude -Imlx -c $< -o $@
+	@cc $(FLAGS) -Imlx -I$(MINILIBX_PATH) -c $< -o $@
 
 $(NAME): $(OBJS) $(MINILIBX)
-	@cc $(FLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
+	@cc $(FLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME) -L$(MINILIBX_PATH)
 
 $(MINILIBX):
 	@make -C $(MINILIBX_PATH)
 
 clean:
 	@rm -f $(OBJS)
-	@make clean -C $(MINILIBX_PATH)
 	@echo "$(YELLOW)object files deleted!$(DEFAULT)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(MINILIBX)
-	@echo "$(RED)all deleted!$(DEFAULT)"
+	@echo "$(RED)$(NAME) deleted!$(DEFAULT)"
 
-re: clean fclean all
+re: fclean all
 
-.PHONY:			all clean fclean re
+.PHONY: all clean fclean re
+
 
 # NAME = cub3d
 

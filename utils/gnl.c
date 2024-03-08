@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:45:20 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/06 04:20:51 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:10:57 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_strjoin_next(char *s1, char *s2)
 	if (!s3)
 		return (NULL);
 	while (s1 && s1[i])
-	{	
+	{
 		s3[i] = s1[i];
 		i++;
 	}

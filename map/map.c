@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcarlucc <fcarlucc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:25:27 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/07 04:45:38 by fcarlucc         ###   ########.fr       */
+/*   Updated: 2024/03/08 21:21:57 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_map(char *path)
 	init_map(map);
 	if (take_params(map, path))
 	{
-		raycast(map);
+		raycasting(map);
 		return (1);
 	}
 	return (0);
@@ -55,7 +55,7 @@ int	take_params(t_map *map, char *path)
 {
 	int		fd;
 	char	*s;
-	
+
 	if (check_extension(path))
 	{
 		fd = open(path, O_RDONLY);
@@ -67,11 +67,11 @@ int	take_params(t_map *map, char *path)
 				return (err("Error: invalid map parameters.\n"));
 			s = get_next_line(fd);
 		}
-		printf("%s\n%s\n%s\n%s\n%s\n%s\n", map->no ,map->so ,map->we ,map->ea ,map->f_rgb ,map->c_rgb);
+		printf("%s\n%s\n%s\n%s\n%s\n%s\n", map->no, map->so, map->we, map->ea, map->f_rgb, map->c_rgb);
 		if (!map->flag || !purify_map(map, fd, s))
 			return (err("Error: invalid map.\n"));
 		take_colors(map);
-		printf("\n\ncolors:\n\n%d\n%d\n%d\n%d\n%d\n%d\n%s\n%s\n", map->f[0] ,map->f[1] ,map->f[2] ,map->c[0] ,map->c[1],map->c[2], map->f_rgb, map->c_rgb);
+		printf("\n\ncolors:\n\n%d\n%d\n%d\n%d\n%d\n%d\n%s\n%s\n", map->f[0], map->f[1], map->f[2], map->c[0], map->c[1], map->c[2], map->f_rgb, map->c_rgb);
 		close(fd);
 		return (1);
 	}
@@ -113,7 +113,7 @@ int	take_params(t_map *map, char *path)
 
 void	take_colors(t_map *map)
 {
-	char **colors;
+	char	**colors;
 
 	colors = ft_split(map->f_rgb, ',');
 	map->f[0] = ft_atoi(colors[0]);
@@ -144,19 +144,19 @@ int	purify_map(t_map *map, int fd, char *s)
 	res = fix_map(map, res);
 	if (check_player(map, res) != 1)
 		return (err("Error: the map must contain 1 player.\n\n"));
-	printf("\n\n%s\n\n\ncol%d\nrow%d\n%d\n%d", res, map->cols, map->rows, map->y, map->x);
+	printf("\n\n%s\n\n\ncol%d\nrow%d\n%d\n%d\n", res, map->cols, map->rows, map->y, map->x);
 	if (is_playable(map))
-        play(map);
+		play(map);
 	else
 	{
 		free(res);
-	    return (0);
+		return (0);
 	}
 	free(res);
 	return (1);
 }
 
-char	*fix_map(t_map *map, char *s) 
+char	*fix_map(t_map *map, char *s)
 {
 	int		i;
 	int		j;
