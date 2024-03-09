@@ -1,9 +1,6 @@
 SEGFAULT:
 -Risolti: Ce ne stavano svariati, la maggior parte dovuti al fatto che a volte la struttura map veniva richiamata direttamente con map->variabile mentre altre volte veniva richiamata con ray->map->variabile quindi magari si perdeva traccia delle definizioni fatte in precedenza
 -Da risolvere il segafault nel ciclo while di perform_dda dovuto al fatto che la variabile hit non diventa mai 1 quindi ci troviamo in un ciclo infinito (ora hit l'ho messa a 1 giusto per togliere momentaneamente il segfault)
--Da risolvere il segafult con mlx_loop(); Commentando mlx_loop_hook(game->mlx, raycasting, 0) allora non va in segfault e si apre fissa la finestra di gioco.
 
-Key_Hook:
--I keycode sono numeri diversi dal solito, colpa di linux?
--ESC funziona
--WASD non funziona perché va in segfault perché i valori di x e y cambiano a cazzo e quindi ci troviamo fuori mappa
+MOVIMENTI:
+funzionano e non vanno oltre i muri

@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 22:25:27 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/08 21:21:57 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:19:28 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	take_colors(t_map *map)
 	map->f[1] = ft_atoi(colors[1]);
 	map->f[2] = ft_atoi(colors[2]);
 	//free_matrix
-	colors = ft_split(map->c_rgb, ','); //capiren se fare funzione dove converto in esadecimale il colore 
+	colors = ft_split(map->c_rgb, ','); //capire se fare funzione dove converto in esadecimale il colore 
 	map->c[0] = ft_atoi(colors[0]);
 	map->c[1] = ft_atoi(colors[1]);
 	map->c[2] = ft_atoi(colors[2]);
