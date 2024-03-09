@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 04:00:22 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/09 19:37:45 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:56:04 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_playable(t_map *map)
 	int	j;
 
 	i = -1;
-	//flood_fill(map, map->y, map->x);
+	flood_fill(map, map->y, map->x);
 	if (map->flag == 42)
 		return (err("Error: the map is open.\n"));
 	for (int i = 0; i <= map->rows; i++) {

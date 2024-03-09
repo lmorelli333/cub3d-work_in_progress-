@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/08 21:17:50 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:11:06 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	ray_init(t_ray *ray, t_map *map);
 void	define_view(t_ray *ray, t_map *map);
 void	calculate_ray_position_and_direction(t_ray *ray, int i);
 void	calculate_step_and_side_distances(t_ray *ray);
-void	perform_dda(t_ray *ray); //Digital Differential Analyzer (traccia i raggi)
+void	perform_dda(t_ray *ray);//Digital Differential Analyzer (traccia i raggi)
 void	calculate_distance_projected_on_camera(t_ray *ray);
 void	calculate_pixels(t_ray *ray);
 // void set_ray_color(t_ray *ray);

@@ -6,11 +6,21 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:29:11 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/08 20:30:23 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:17:28 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+
+void    printmatrix2(t_map *m, char **mtx)
+{
+ for (int i = 0; i <= m->rows; i++) {
+		for (int j = 0; j < m->cols; j++) {
+			printf("%c", mtx[i][j]);
+		}
+		printf("\n");
+}
+}
 
 int	raycasting(t_map *map)
 {
@@ -24,11 +34,11 @@ int	raycasting(t_map *map)
 	i = -1;
 	while (++i < screenWidth)    //vedere se sostituire i con widtheight
 	{
-		// calculate_ray_position_and_direction(ray, i);
-		// calculate_step_and_side_distances(ray);
-		// perform_dda(ray);
-		// calculate_distance_projected_on_camera(ray);
-		// calculate_pixels(ray);
+		calculate_ray_position_and_direction(ray, i);
+		calculate_step_and_side_distances(ray);
+		perform_dda(ray);
+		calculate_distance_projected_on_camera(ray);
+		calculate_pixels(ray);
 	}
 	return (0);
 }
@@ -61,6 +71,8 @@ void	ray_init(t_ray *ray, t_map *map)
 	ray->drawEnd = 0;
 	ray->dirY = 0;
 	ray->dirX = 0;
+	//ray->map->map = map->map;
+	//printmatrix2(map, ray->map->map);
 }
 
 void	calculate_ray_position_and_direction(t_ray *ray, int i)
