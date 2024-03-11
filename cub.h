@@ -6,7 +6,7 @@
 /*   By: lmorelli <lmorelli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:47:15 by fcarlucc          #+#    #+#             */
-/*   Updated: 2024/03/09 20:11:06 by lmorelli         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:19:03 by lmorelli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,16 @@ typedef struct s_map
 	//da freeare stringhe e struct
 }		t_map;
 
+typedef struct s_img
+{
+	void	*wall;
+	void	*floor;
+	void	*player;
+}	t_img;
+
 typedef struct s_game
 {
+	t_img	*img;
 	void	*mlx;
 	void	*window;
 	void	*image;

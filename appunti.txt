@@ -1,6 +1,8 @@
 SEGFAULT:
--Risolti: Ce ne stavano svariati, la maggior parte dovuti al fatto che a volte la struttura map veniva richiamata direttamente con map->variabile mentre altre volte veniva richiamata con ray->map->variabile quindi magari si perdeva traccia delle definizioni fatte in precedenza
 -Da risolvere il segafault nel ciclo while di perform_dda dovuto al fatto che la variabile hit non diventa mai 1 quindi ci troviamo in un ciclo infinito (ora hit l'ho messa a 1 giusto per togliere momentaneamente il segfault)
 
 MOVIMENTI:
-funzionano e non vanno oltre i muri
+-funzionano e non vanno oltre i muri
+-ho inserito delle immagini di prova. Per il momento é come so_long, put_img e mlx_clear_window sono commentati quindi l immagine del player non si muove (il problema sta in mlx_clear_window, sistemato quello dovrebbe andare anche il richiamo a put_img)
+-poi ti giuro pulisco tutto che ora sta tutto in check_map
+-da ricontrollare bene la grandezza della mappa, il conteggio di colonne e righe ecc perché c é qualcosa che non va
