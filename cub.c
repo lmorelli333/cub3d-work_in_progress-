@@ -12,6 +12,27 @@
 
 #include "cub.h"
 
+void	play(t_map *map)
+{
+	t_game	*game;
+
+	printf("====> %c\n", map->map[map->y][map->x]);
+	game = (t_game *)malloc(sizeof(t_game));
+	if (!game)
+		return ;
+	game->mlx = mlx_init();
+	game->window = mlx_new_window(game->mlx, 1280, 960, "cub3d"); //oppure 64 *col o rows
+	//game->image = mlx_new_image(game->mlx, map->cols * 64, map->rows * 64);
+	//game->address = mlx_get_data_addr(game->image, &game->bpp, &game->line_len, &game->endian);
+	take_img(game);
+	put_img01(game, map);
+	//mlx_put_image_to_window(game->mlx, game->window, game->image, 0, 0);
+	//mlx_hook(game->window, 17, 1L << 2, ft_close, game);
+	mlx_hook(game->window, 2, 1L << 0, ft_move, map);
+	//mlx_loop_hook(game->mlx, raycasting, game);
+	mlx_loop(game->mlx);
+}
+
 int	main(int ac, char **av)
 {
 	if (ac == 2)

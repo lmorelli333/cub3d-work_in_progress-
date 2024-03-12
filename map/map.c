@@ -35,22 +35,6 @@ void	init_map(t_map	*map)
 	return ;
 }
 
-int	check_map(char *path)
-{
-	t_map	*map;
-
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
-		return (0);
-	init_map(map);
-	if (take_params(map, path))
-	{
-		raycasting(map);
-		return (1);
-	}
-	return (0);
-}
-
 int	take_params(t_map *map, char *path)
 {
 	int		fd;

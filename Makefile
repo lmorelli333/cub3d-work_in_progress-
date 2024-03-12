@@ -23,7 +23,7 @@ FLAGS := -Wall -Wextra -Werror -g
 
 MLX_FLAGS = -lmlx -lX11 -lXext -lm
 
-MINILIBX_PATH = /nfs/homes/lmorelli/Desktop/CUB3D/minilibx
+MINILIBX_PATH = ./minilibx
 
 MINILIBX = $(MINILIBX_PATH)/libmlx.a
 

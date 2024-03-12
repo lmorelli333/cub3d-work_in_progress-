@@ -115,8 +115,10 @@ int		take_params(t_map *map, char *path);
 int		check_map(char *path);
 int		purify_map(t_map *map, int fd, char *s);
 char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
-
+int		ft_move(int keycode, t_map *map, t_game *game);
 void	take_colors(t_map *map);
+void    printmatrix(t_map *map);
+void	check_player_position(t_map *map);
 //map_utils.c
 int		check_extension(char *path);
 void	textures_and_colors(t_map *map, char *s);
@@ -141,6 +143,10 @@ void	calculate_distance_projected_on_camera(t_ray *ray);
 void	calculate_pixels(t_ray *ray);
 // void set_ray_color(t_ray *ray);
 // void draw_lines(t_game *game, int x, int y1, int y2, int color);
+
+//img
+void	take_img(t_game *game);
+void	put_img01(t_game *game, t_map *map);
 
 #endif
 
