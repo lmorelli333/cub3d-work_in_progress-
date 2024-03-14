@@ -12,6 +12,27 @@
 
 #include "../cub.h"
 
+void	calculate_fps(t_ray *ray)
+{
+	//char	*number;
+
+	ray->old_time = ray->time;
+	ray->time = get_time();
+	ray->frame_time = (ray->time - ray->old_time) / 1000.0;
+	ray->fps = (int)(1.0 / ray->frame_time);
+	if (ray->fps > 60)
+	{
+		ft_wait(((1.0 / 60) - ray->frame_time) * 1000);
+		ray->time = get_time();
+		ray->frame_time = (ray->time - ray->old_time) / 1000.0;
+		ray->fps = (int)(1.0 / ray->frame_time);
+	}
+	// number = ft_itoa(game->fps);
+	// mlx_string_put(game->mlx, cube->mlx_win,
+	// 	SCREENWIDTH - 50, 20, -1, number);
+	// free(number);
+}
+
 void    printmatrix2(t_map *m, char **mtx)
 {
  for (int i = 0; i <= m->rows; i++) {
@@ -40,6 +61,8 @@ int	raycasting(t_map *map)
 		calculate_distance_projected_on_camera(ray);
 		calculate_pixels(ray);
 	}
+	calculate_fps(ray);
+	update_movement(ray, map);
 	return (0);
 }
 
@@ -47,13 +70,11 @@ void	ray_init(t_ray *ray, t_map *map)
 {
 	ray->mapX = 0;
 	ray->mapY = 0;
-	ray->posX = (double)map->x;
-	ray->posY = (double)map->y;
+	ray->posx = (double)map->x;
+	ray->posy = (double)map->y;
 	define_view(ray, map);
 	ray->planeX = 0;
 	ray->planeY = 0.66;
-	ray->time = 0;
-	ray->oldTime = 0;
 	ray->cameraX = 0;
 	ray->rayDirX = 0;
 	ray->rayDirY = 0;
@@ -69,8 +90,10 @@ void	ray_init(t_ray *ray, t_map *map)
 	ray->lineHeight = 0;
 	ray->drawStart = 0;
 	ray->drawEnd = 0;
-	ray->dirY = 0;
-	ray->dirX = 0;
+	ray->diry = 0;
+	ray->dirx = 0;
+	ray->time = 0;
+	ray->old_time = 0;
 	//ray->map->map = map->map;
 	//printmatrix2(map, ray->map->map);
 }
@@ -78,10 +101,10 @@ void	ray_init(t_ray *ray, t_map *map)
 void	calculate_ray_position_and_direction(t_ray *ray, int i)
 {
 	ray->cameraX = 2 * i / (double)screenWidth - 1;
-	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
-	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
-	ray->mapX = ray->posX;
-	ray->mapY = ray->posY;
+	ray->rayDirX = ray->dirx + ray->planeX * ray->cameraX;
+	ray->rayDirY = ray->diry + ray->planeY * ray->cameraX;
+	ray->mapX = ray->posx;
+	ray->mapY = ray->posy;
 	if (ray->rayDirX == 0)
 		ray->deltaDistX = 1e30;
 	else
@@ -97,22 +120,22 @@ void	calculate_step_and_side_distances(t_ray *ray)
 	if (ray->rayDirX < 0)
 	{
 		ray->stepX = -1;
-		ray->sideDistX = (ray->posX - ray->mapX) * ray->deltaDistX;
+		ray->sideDistX = (ray->posx - ray->mapX) * ray->deltaDistX;
 	}
 	else
 	{
 		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - ray->posX) * ray->deltaDistX;
+		ray->sideDistX = (ray->mapX + 1.0 - ray->posx) * ray->deltaDistX;
 	}
 	if (ray->rayDirY < 0)
 	{
 		ray->stepY = -1;
-		ray->sideDistY = (ray->posY - ray->mapY) * ray->deltaDistY;
+		ray->sideDistY = (ray->posy - ray->mapY) * ray->deltaDistY;
 	}
 	else
 	{
 		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - ray->posY) * ray->deltaDistY;
+		ray->sideDistY = (ray->mapY + 1.0 - ray->posy) * ray->deltaDistY;
 	}
 }
 
@@ -160,23 +183,23 @@ void define_view(t_ray *ray, t_map *map)
 {
 	if (map->view == 'N')
 	{
-		ray->dirY = -1;
-		ray->dirX = 0;
+		ray->diry = -1;
+		ray->dirx = 0;
 	}
 	if (map->view == 'S')
 	{
-		ray->dirY = 1;
-		ray->dirX = 0;
+		ray->diry = 1;
+		ray->dirx = 0;
 	}
 	if (map->view == 'W')
 	{
-		ray->dirY = 0;
-		ray->dirX = -1;
+		ray->diry = 0;
+		ray->dirx = -1;
 	}
 	if (map->view == 'E')
 	{
-		ray->dirY = 0;
-		ray->dirX = 1;
+		ray->diry = 0;
+		ray->dirx = 1;
 	}
 }
 

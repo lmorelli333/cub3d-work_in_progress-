@@ -14,6 +14,7 @@
 
 void	init_map(t_map	*map)
 {
+
 	map->map = NULL;
 	map->no = NULL;
 	map->so = NULL;

@@ -6,3 +6,4 @@ MOVIMENTI:
 -ho inserito delle immagini di prova. Per il momento é come so_long, put_img e mlx_clear_window sono commentati quindi l immagine del player non si muove (il problema sta in mlx_clear_window, sistemato quello dovrebbe andare anche il richiamo a put_img)
 -poi ti giuro pulisco tutto che ora sta tutto in check_map
 -da ricontrollare bene la grandezza della mappa, il conteggio di colonne e righe ecc perché c é qualcosa che non va
+
