@@ -151,7 +151,7 @@ void	calculate_pixels(t_ray *ray);
 // void set_ray_color(t_ray *ray);
 // void draw_lines(t_game *game, int x, int y1, int y2, int color);
 
-void	update_movement(t_ray *ray, t_map *map);
+void	which_movement(t_ray *ray, t_map *map);
 
 //img
 void	take_img(t_game *game);

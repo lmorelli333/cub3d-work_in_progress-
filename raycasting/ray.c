@@ -62,7 +62,7 @@ int	raycasting(t_map *map)
 		calculate_pixels(ray);
 	}
 	calculate_fps(ray);
-	update_movement(ray, map);
+	which_movement(ray, map);
 	return (0);
 }
 

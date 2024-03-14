@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-void	move_forward(t_ray *ray, double speed_move, t_map *map)
+void	move_up(t_ray *ray, double speed_move, t_map *map)
 {
 	if (map->map[(int)ray->posy]
 		[(int)(ray->posx + ray->dirx * speed_move)] == '0')
@@ -12,7 +12,7 @@ void	move_forward(t_ray *ray, double speed_move, t_map *map)
 			* speed_move;
 }
 
-void	move_backward(t_ray *ray, double speed_move, t_map *map)
+void	move_down(t_ray *ray, double speed_move, t_map *map)
 {
 	if (map->map[(int)ray->posy]
 		[(int)(ray->posx - ray->dirx * speed_move)] == '0')
@@ -44,19 +44,19 @@ void	move_right(t_ray *ray, double speed_move, t_map *map)
 		ray->posy -= (ray->dirx) * speed_move;
 }
 
-void	update_movement(t_ray *ray, t_map *map)
+void	which_movement(t_ray *ray, t_map *map)
 {
 	double	speed_move;
 
 	speed_move = ray->frame_time * 5.0;
 	if (ray->diry == 1)
-		move_forward(ray, speed_move, map);
+		move_up(ray, speed_move, map);
 	if (ray->diry == -1)
-		move_backward(ray, speed_move, map);
-	if (ray->dirx == -1)
-		move_left(ray, speed_move, map);
+		move_down(ray, speed_move, map);
 	if (ray->dirx == 1)
 		move_right(ray, speed_move, map);
+	if (ray->dirx == -1)
+		move_left(ray, speed_move, map);
 }
 
 // void	rotate_camera(float angle, t_game *game)
@@ -116,6 +116,7 @@ void	update_movement(t_ray *ray, t_map *map)
 
 int	ft_move(int keycode, t_ray *ray)
 {
+	printf("Tasto premuto: %d\n", keycode);
 	if (keycode == 97)
 		ray->dirx = -1;
 	else if (keycode == 115)
