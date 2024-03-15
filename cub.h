@@ -41,6 +41,7 @@ typedef struct s_map
 	char	*ea;
 	char	*f_rgb; 		//capire come passare a mlx se da int o stringa
 	char	*c_rgb; 		//e poi implementare colors.c/read_rgb(){}
+	char	view;
 	int		f[3];
 	int		c[3];
 	int		flag;
@@ -48,7 +49,6 @@ typedef struct s_map
 	int		rows;
 	int		y;
 	int		x;
-	char	view;
 	//da freeare stringhe e struct
 }		t_map;
 
@@ -73,70 +73,67 @@ typedef struct s_game
 
 typedef struct s_ray
 {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planeX;
-	double	planeY;
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
-	int		hit;
-	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	t_map *map;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
 	double	frame_time;
-	int		fps;
 	double	time;
 	double	old_time;
-	t_map *map;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		fps;
 }		t_ray;
 
-char	*get_next_line(int fd);
-char	**ft_split(char const *s, char c);
 
 //utils.c
 int		err(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	len_number(int n);
-char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
-u_int64_t	get_time(void);
+size_t	len_number(int n);
+char	*get_next_line(int fd);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_itoa(int n);
 void	ft_wait(u_int64_t time);
+u_int64_t	get_time(void);
 
 //map.c
 void	init_map(t_map	*map);
-// int		take_params(char *path);
-int		take_params(t_map *map, char *path);
-int		check_map(char *path);
-int		purify_map(t_map *map, int fd, char *s);
-char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
-int		ft_move(int keycode, t_ray *ray);
 void	take_colors(t_map *map);
 void    printmatrix(t_map *map);
 void	check_player_position(t_map *map);
+int		take_params(t_map *map, char *path);
+int		check_map(char *path);
+int		purify_map(t_map *map, int fd, char *s);
+int		ft_move(int keycode, t_ray *ray);
+char	*fix_map(t_map *map, char *s);//contolla se da gestire /r/f/v
 //map_utils.c
 int		check_extension(char *path);
-void	textures_and_colors(t_map *map, char *s);
 int		check_player(t_map *map, char *s);
+void	textures_and_colors(t_map *map, char *s);
 void	find_rows_and_cols(t_map *map, char *s);
-
 //check_map.c
 int		is_playable(t_map *map);
-void	flood_fill(t_map *map, int y, int x);
 int		ft_close(void);
-// int		ft_move(t_map *map, int keycode);
+void	flood_fill(t_map *map, int y, int x);
 void	play(t_map *map);
 
 //ray.c

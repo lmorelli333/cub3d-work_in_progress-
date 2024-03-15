@@ -68,30 +68,30 @@ int	raycasting(t_map *map)
 
 void	ray_init(t_ray *ray, t_map *map)
 {
-	ray->mapX = 0;
-	ray->mapY = 0;
-	ray->posx = (double)map->x;
-	ray->posy = (double)map->y;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->pos_x = (double)map->x;
+	ray->pos_y = (double)map->y;
 	define_view(ray, map);
-	ray->planeX = 0;
-	ray->planeY = 0.66;
-	ray->cameraX = 0;
-	ray->rayDirX = 0;
-	ray->rayDirY = 0;
-	ray->sideDistX = 0;
-	ray->sideDistY = 0;
-	ray->deltaDistX = 0;
-	ray->deltaDistY = 0;
-	ray->perpWallDist = 0;
-	ray->stepX = 0;
-	ray->stepY = 0;
+	ray->plane_x = 0;
+	ray->plane_y = 0.66;
+	ray->camera_x = 0;
+	ray->raydir_x = 0;
+	ray->raydir_y = 0;
+	ray->sidedist_x = 0;
+	ray->sidedist_y = 0;
+	ray->delta_dist_x = 0;
+	ray->delta_dist_y = 0;
+	ray->perp_wall_dist = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
 	ray->hit = 1;
 	ray->side = 0;
-	ray->lineHeight = 0;
-	ray->drawStart = 0;
-	ray->drawEnd = 0;
-	ray->diry = 0;
-	ray->dirx = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
+	ray->dir_y = 0;
+	ray->dir_x = 0;
 	ray->time = 0;
 	ray->old_time = 0;
 	//ray->map->map = map->map;
@@ -100,42 +100,42 @@ void	ray_init(t_ray *ray, t_map *map)
 
 void	calculate_ray_position_and_direction(t_ray *ray, int i)
 {
-	ray->cameraX = 2 * i / (double)screenWidth - 1;
-	ray->rayDirX = ray->dirx + ray->planeX * ray->cameraX;
-	ray->rayDirY = ray->diry + ray->planeY * ray->cameraX;
-	ray->mapX = ray->posx;
-	ray->mapY = ray->posy;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->camera_x = 2 * i / (double)screenWidth - 1;
+	ray->raydir_x = ray->dir_x + ray->plane_x * ray->camera_x;
+	ray->raydir_y = ray->dir_y + ray->plane_y * ray->camera_x;
+	ray->map_x = ray->pos_x;
+	ray->map_y = ray->pos_y;
+	if (ray->raydir_x == 0)
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_dist_y = fabs(1 / ray->raydir_y);
 }
 
 void	calculate_step_and_side_distances(t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->raydir_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (ray->posx - ray->mapX) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->sidedist_x = (ray->pos_x - ray->map_x) * ray->delta_dist_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - ray->posx) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->sidedist_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_dist_x;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->raydir_y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (ray->posy - ray->mapY) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->sidedist_y = (ray->pos_y - ray->map_y) * ray->delta_dist_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - ray->posy) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->sidedist_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_dist_y;
 	}
 }
 
@@ -143,19 +143,19 @@ void	perform_dda(t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->sidedist_x < ray->sidedist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->sidedist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->sidedist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map->map[ray->mapX][ray->mapY] > 0)
+		if (ray->map->map[ray->map_x][ray->map_y] > 0)
 			ray->hit = 1;
 	}
 }
@@ -163,50 +163,50 @@ void	perform_dda(t_ray *ray)
 void	calculate_distance_projected_on_camera(t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perpWallDist = ray->sideDistX - ray->deltaDistX;
+		ray->perp_wall_dist = ray->sidedist_x - ray->delta_dist_x;
 	else
-		ray->perpWallDist = ray->sideDistY - ray->deltaDistY;
+		ray->perp_wall_dist = ray->sidedist_y - ray->delta_dist_y;
 }
 
 void calculate_pixels(t_ray *ray)
 {
-	ray->lineHeight = (int)(screenHeight / ray->perpWallDist);
-	ray->drawStart = -ray->lineHeight / 2 + screenHeight / 2;
-	if (ray->drawStart < 0)
-		ray->drawStart = 0;
-	ray->drawEnd = ray->lineHeight / 2 + screenHeight / 2;
-	if (ray->drawEnd >= screenHeight)
-		ray->drawEnd = screenHeight - 1;
+	ray->line_height = (int)(screenHeight / ray->perp_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + screenHeight / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + screenHeight / 2;
+	if (ray->draw_end >= screenHeight)
+		ray->draw_end = screenHeight - 1;
 }
 
 void define_view(t_ray *ray, t_map *map)
 {
 	if (map->view == 'N')
 	{
-		ray->diry = -1;
-		ray->dirx = 0;
+		ray->dir_y = -1;
+		ray->dir_x = 0;
 	}
 	if (map->view == 'S')
 	{
-		ray->diry = 1;
-		ray->dirx = 0;
+		ray->dir_y = 1;
+		ray->dir_x = 0;
 	}
 	if (map->view == 'W')
 	{
-		ray->diry = 0;
-		ray->dirx = -1;
+		ray->dir_y = 0;
+		ray->dir_x = -1;
 	}
 	if (map->view == 'E')
 	{
-		ray->diry = 0;
-		ray->dirx = 1;
+		ray->dir_y = 0;
+		ray->dir_x = 1;
 	}
 }
 
 // void set_ray_color(t_ray *ray, t_map *map)         NON SO SE SERVE
 // {
 // 	int mapValue;
-// 	mapValue = map->map[ray->mapX][ray->mapY];
+// 	mapValue = map->map[ray->map_x][ray->map_y];
 
 // 	if (mapValue == 1)
 // 		ray->color = 0xFF0000;
